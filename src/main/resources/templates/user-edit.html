@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+<h2>Edit User</h2>
+<form th:action="@{/users/edit}" method="post" accept-charset="UTF-8">
+    <input type="hidden" name="id" th:value="${user.id}">
+    Name: <input type="text" name="name" th:value="${user.name}"><br>
+    Surname: <input type="text" name="surname" th:value="${user.surname}"><br>
+    Age: <input type="number" name="age" th:value="${user.age}"><br>
+    <button type="submit">Update</button>
+</form>
+<a th:href="@{/users}">Back</a>
+</body>
+</html>
