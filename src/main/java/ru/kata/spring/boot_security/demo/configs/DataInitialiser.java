@@ -28,19 +28,19 @@ public class DataInitialiser {
             Role adminRole = roleRepository.findByName("ROLE_ADMIN");
             Role userRole = roleRepository.findByName("ROLE_USER");
 
-            if (userRepository.findByUsername("admin").isEmpty()) {
+            if (userRepository.findByEmail("admin@mail.ru").isEmpty()) {
                 User admin = new User();
-                admin.setUsername("admin");
+                admin.setEmail("admin@mail.ru");
                 admin.setPassword(passwordEncoder.encode("admin"));
                 admin.setName("Александр");
                 admin.setSurname("Мухин");
                 admin.setAge(29);
-                admin.setRoles(Set.of(adminRole,userRole));
+                admin.setRoles(Set.of(adminRole, userRole));
                 userRepository.save(admin);
             }
-            if (userRepository.findByUsername("user").isEmpty()) {
+            if (userRepository.findByEmail("user@mail.ru").isEmpty()) {
                 User user = new User();
-                user.setUsername("user");
+                user.setEmail("user@mail.ru");
                 user.setPassword(passwordEncoder.encode("user"));
                 user.setName("Иван");
                 user.setSurname("Иванов");

@@ -8,9 +8,8 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 @Controller
 public class UserPageController {
-
     @GetMapping("/user")
-    public String userPage(@AuthenticationPrincipal User user, Model model){
+    public String userPage(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
         return "user";
     }
