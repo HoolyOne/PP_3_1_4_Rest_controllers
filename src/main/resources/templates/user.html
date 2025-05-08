@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>User information-page</title>
@@ -9,44 +8,36 @@
         body {
             background-color: #f8f9fa;
         }
-
         .sidebar {
             min-height: 100vh;
             background: #fff;
             border-right: 1px solid #dee2e6;
             padding-top: 0;
         }
-
         .sidebar .nav-link.active {
             background-color: #0d6efd;
             color: #fff !important;
         }
-
         .sidebar .nav-link {
             color: #0d6efd;
             font-weight: 500;
         }
-
         .navbar-dark {
             background-color: #343a40;
         }
-
         .navbar-text {
             color: #fff;
             font-weight: bold;
         }
-
         .content {
             padding: 30px;
         }
-
         .info-table {
             background: #fff;
             border-radius: 8px;
             padding: 24px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
-
         .info-table th, .info-table td {
             vertical-align: middle;
         }
@@ -56,15 +47,11 @@
 <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #343a40;">
     <div class="container-fluid">
         <span class="navbar-text ms-3">
-            <span th:text="${#authentication.name}"></span>
-            <span th:if="${#authentication.authorities}">
-                with roles:
-                <span th:each="auth : ${#authentication.authorities}"
-                      th:text="${#strings.replace(auth.authority, 'ROLE_', '') + ' '}"></span>
-            </span>
+            <span id="currentUserEmail"></span>
+            <span id="currentUserRoles"></span>
         </span>
-        <form th:action="@{/logout}" method="post" class="d-inline ms-auto me-3">
-            <button class="btn btn-dark" type="submit">Logout</button>
+        <form id="logoutForm" method="post" class="d-inline ms-auto me-3">
+            <button id="logoutButton" class="btn btn-dark ms-auto me-3" style="display: inline-block;">Logout</button>
         </form>
     </div>
 </nav>
@@ -74,11 +61,11 @@
         <nav class="col-md-2 d-none d-md-block sidebar pt-4">
             <div class="position-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" th:href="@{/admin}">Admin</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin" id="adminLink">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user}">User</a>
+                        <a class="nav-link active" href="/user">User</a>
                     </li>
                 </ul>
             </div>
@@ -99,15 +86,12 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td th:text="${user.id}"></td>
-                        <td th:text="${user.name}"></td>
-                        <td th:text="${user.surname}"></td>
-                        <td th:text="${user.age}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td>
-                                <span th:each="role : ${user.roles}"
-                                      th:text="${#strings.replace(role.name, 'ROLE_', '') + ' '}"></span>
-                        </td>
+                        <td id="userId"></td>
+                        <td id="userName"></td>
+                        <td id="userSurname"></td>
+                        <td id="userAge"></td>
+                        <td id="userEmail"></td>
+                        <td id="userRoles"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -115,5 +99,6 @@
         </main>
     </div>
 </div>
+<script src="/js/user.js"></script>
 </body>
 </html>
