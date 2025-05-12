@@ -9,7 +9,7 @@ function getCookie(name) {
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // 1. Загрузка данных пользователя
-        const userResponse = await fetch('/api/user/me', {
+        const userResponse = await fetch('/api/users/current', {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json'
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // 2. Загрузка названий ролей
-        const rolesResponse = await fetch('/api/user/me/roles', {
+        const rolesResponse = await fetch('/api/users/current/roles', {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json'

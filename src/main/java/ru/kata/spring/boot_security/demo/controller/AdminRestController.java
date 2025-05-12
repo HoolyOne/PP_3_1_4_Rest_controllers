@@ -28,6 +28,7 @@ public class AdminRestController {
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
+
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userService.listUsersWithRoles());
@@ -45,6 +46,7 @@ public class AdminRestController {
         userService.addUser(user);
         return ResponseEntity.ok(user);
     }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
         User user = userService.getUserByIdWithRoles(id);
@@ -55,11 +57,13 @@ public class AdminRestController {
         userService.updateUser(user);
         return ResponseEntity.ok(user);
     }
+
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.removeUser(id);
         return ResponseEntity.ok().build();
     }
+
     private void updateUserFromDto(User user, UserDto userDto) {
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());

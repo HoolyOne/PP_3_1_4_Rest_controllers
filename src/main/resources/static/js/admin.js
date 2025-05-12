@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadCurrentUser() {
     try {
-        const response = await axios.get('/api/user/me');
+        const response = await axios.get('/api/users/current');
         currentUser = response.data;
         document.getElementById('currentUserEmail').textContent = currentUser.email;
         document.getElementById('currentUserRoles').textContent = 'with roles: ' +
